@@ -1,6 +1,6 @@
 # ODRUCH
 
-**[Zagraj w przeglądarce](https://apkmasondev.github.io/odruch/)**
+**[Zagraj w przeglądarce](https://apkmason.dev/odruch/)**
 
 Autorska platformówka 2D: 21 krótkich poziomów, trzy rozdziały i świat, który reaguje na ruch gracza. Precyzyjne skoki, przewrotne przeszkody i błyskawiczna kolejna próba.
 
