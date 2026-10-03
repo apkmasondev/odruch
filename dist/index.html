@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f5f3ec" />
+    <meta
+      name="description"
+      content="ODRUCH — 21 przewrotnych poziomów w trzech rozdziałach. Autorska platformówka o świecie, który reaguje na twój ruch."
+    />
+    <title>ODRUCH — świat ma swoje odruchy</title>
+    <link rel="icon" href="./icon.svg">
+    <link rel="stylesheet" href="./game.206c38b6264b.css">
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="" aria-label="ODRUCH — ekran startowy"
+          ><span class="brand-mark">o</span>odruch</a
+        >
+        <div class="edition">platformówka z przekorą</div>
+        <div class="tools">
+          <button
+            id="sound"
+            class="icon-button"
+            aria-label="Wyłącz dźwięk"
+            title="Dźwięk (M)"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M11 5 6 9H3v6h3l5 4V5Zm4 3c3 2 3 6 0 8m3-11c5 4 5 10 0 14"
+              />
+            </svg></button
+          ><button
+            id="settings"
+            class="icon-button"
+            aria-label="Ustawienia"
+            title="Ustawienia"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7h16M4 17h16M8 4v6m8 4v6" />
+            </svg></button
+          ><button
+            id="fullscreen"
+            class="icon-button"
+            aria-label="Pełny ekran"
+            title="Pełny ekran"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M9 4H4v5m11-5h5v5M4 15v5h5m6 0h5v-5" />
+            </svg>
+          </button>
+        </div>
+      </header>
+      <main>
+        <div class="stage-top">
+          <span id="chapter">TRZY ROZDZIAŁY / 21 POZIOMÓW</span
+          ><span class="live"><span id="status">LEWO. PRAWO. OJ.</span></span>
+        </div>
+        <section class="stage" aria-label="Gra ODRUCH">
+          <canvas
+            id="game"
+            tabindex="0"
+            aria-label="Plansza gry. Strzałki lub A i D: ruch. Spacja: skok. R: restart. Escape: pauza."
+          ></canvas>
+          <div id="hud" class="hud" hidden>
+            <div>
+              <span class="eyebrow" id="level-number"></span>
+              <h2 id="level-name"></h2>
+            </div>
+            <div class="stats">
+              <div><span>PRÓBA</span><b id="attempt">01</b></div>
+              <div><span>CZAS</span><b id="timer">00.00</b></div>
+              <button id="pause" class="icon-button" aria-label="Pauza">
+                Ⅱ
+              </button>
+            </div>
+          </div>
+          <div id="home" class="home overlay">
+            <div class="home-copy">
+              <div class="eyebrow">
+                <span class="mini-line"></span> ŁATWO ZACZĄĆ. TRUDNIEJ SKOŃCZYĆ.
+              </div>
+              <h1 aria-label="Odruch">
+                OD<span class="tilted-letter">R</span>UCH<span class="scribble"
+                  >jeszcze jeden.</span
+                >
+              </h1>
+              <p>Drzwi są tam.<br />Resztę musisz rozgryźć.</p>
+              <button id="play" class="primary">Zagraj <span>→</span></button
+              ><button id="select-home" class="text-button">
+                Wybierz rozdział <span>↓</span>
+              </button>
+              <div class="home-note">
+                <span class="tiny-hero" aria-hidden="true">••</span> Mały gość.
+                Duży problem.
+              </div>
+            </div>
+            <div class="edition-stamp">
+              <b>21</b><span>POZIOMÓW<br />DO ROZGRYZIENIA</span>
+            </div>
+          </div>
+          <div id="pause-screen" class="center-overlay overlay" hidden>
+            <div class="sheet">
+              <span class="eyebrow">PAUZA</span>
+              <h2>Łap oddech.</h2>
+              <p>Kolce nigdzie się nie wybierają.</p>
+              <button id="resume" class="primary">Wracam <span>→</span></button>
+              <div class="sheet-actions">
+                <button id="retry" class="text-button">Od początku ↺</button
+                ><button id="select-pause" class="text-button">Rozdziały</button
+                ><button id="back-home" class="text-button">Menu</button>
+              </div>
+            </div>
+          </div>
+          <div id="levels-screen" class="center-overlay overlay" hidden>
+            <div class="sheet wide">
+              <div class="map-heading">
+                <div>
+                  <span class="eyebrow">TWOJA TRASA</span>
+                  <h2>Wybierz swoje kłopoty.</h2>
+                </div>
+                <span id="map-total"></span>
+              </div>
+              <div
+                id="chapter-tabs"
+                class="chapter-tabs"
+                role="tablist"
+                aria-label="Rozdziały"
+              ></div>
+              <div id="level-grid" class="level-grid"></div>
+              <p class="map-note">
+                Każdy rozdział możesz zacząć od razu. Kolejne etapy otwierasz po
+                drodze.
+              </p>
+              <button id="close-levels" class="text-button">← Wróć</button>
+            </div>
+          </div>
+          <div id="settings-screen" class="center-overlay overlay" hidden>
+            <div class="sheet">
+              <span class="eyebrow">PO TWOJEMU</span>
+              <h2>Ustawienia.</h2>
+              <label class="setting"
+                >Dźwięk
+                <input id="audio-check" type="checkbox" checked /></label
+              ><label class="setting"
+                >Muzyka rozdziałów
+                <input id="music-check" type="checkbox" checked /></label
+              ><label class="setting"
+                >Duch własnego rekordu
+                <input id="ghost-check" type="checkbox" checked /></label
+              ><label class="setting"
+                >Postać w rogu
+                <input id="watermark-check" type="checkbox" checked /></label
+              ><label class="setting motion-setting"
+                >Ogranicz ruch i wstrząsy
+                <input id="motion-check" type="checkbox"
+              /></label>
+              <div class="sound-mix" aria-label="Głośność">
+                <label for="sfx-volume"
+                  >Efekty
+                  <output id="sfx-volume-value" for="sfx-volume">85%</output>
+                  <input
+                    id="sfx-volume"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value="85"
+                  />
+                </label>
+                <label for="music-volume"
+                  >Muzyka
+                  <output id="music-volume-value" for="music-volume"
+                    >65%</output
+                  >
+                  <input
+                    id="music-volume"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value="65"
+                  />
+                </label>
+              </div>
+              <p class="small">
+                Duch pojawi się po ustanowieniu nowego rekordu.<br />
+                Ruch: ← → lub A D · Skok: spacja, ↑ lub W<br />R: restart · Esc:
+                pauza · M: dźwięk<br />Przytrzymaj skok, żeby polecieć wyżej.
+              </p>
+              <button id="close-settings" class="primary">
+                Gotowe <span>✓</span>
+              </button>
+            </div>
+          </div>
+          <div id="finish-screen" class="center-overlay overlay" hidden>
+            <div class="sheet finish">
+              <div class="finish-symbol">21/21</div>
+              <span class="eyebrow">KONIEC TRASY</span>
+              <h2>Dobra. Wygrałeś.</h2>
+              <p>
+                Świat próbował. Ty próbowałeś więcej.<br />Zostały jeszcze iskry
+                i rekordy.
+              </p>
+              <div id="finish-stats" class="finish-stats"></div>
+              <button id="again" class="primary">
+                Jeszcze raz? <span>↺</span></button
+              ><button id="finish-levels" class="text-button">
+                Popraw swoje rekordy →
+              </button>
+            </div>
+          </div>
+          <div id="toast" class="toast" aria-live="polite"></div>
+          <div id="transition" class="transition" hidden>
+            <span class="eyebrow">POZIOM UKOŃCZONY</span>
+            <h2></h2>
+            <p></p>
+          </div>
+          <div class="touch-controls" id="touch-controls" hidden>
+            <div>
+              <button data-key="left" aria-label="Idź w lewo">←</button
+              ><button data-key="right" aria-label="Idź w prawo">→</button>
+            </div>
+            <button data-key="jump" aria-label="Skocz">↑</button>
+          </div>
+        </section>
+        <footer class="stage-footer">
+          <div class="control-hint">
+            <span class="key">←</span><span class="key">→</span><span>ruch</span
+            ><span class="key space">spacja</span><span>skok</span
+            ><span class="separator"></span><span class="key">R</span
+            ><span>jeszcze raz</span>
+          </div>
+          <div
+            id="progress-dots"
+            class="progress-dots"
+            aria-label="Postęp rozdziału"
+          ></div>
+          <span class="footer-note" id="footer-note"
+            >Przytrzymaj skok, żeby polecieć wyżej.</span
+          >
+        </footer>
+        <nav
+          id="chapter-shelf"
+          class="chapter-shelf"
+          aria-label="Wybierz rozdział"
+        ></nav>
+      </main>
+      <footer class="bottom">
+        <span>ODRUCH</span><span id="overall-progress">0 / 21 ukończonych</span
+        ><span>Nie poddawaj się, mały.</span>
+        <svg
+          id="page-mascot"
+          class="page-mascot"
+          viewBox="0 0 100 130"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g class="mascot-sway">
+            <rect x="22" y="99" width="19" height="24" rx="8" fill="#352c46" />
+            <rect x="60" y="99" width="19" height="24" rx="8" fill="#352c46" />
+            <rect x="16" y="16" width="72" height="92" rx="28" fill="#b95c48" />
+            <rect x="12" y="12" width="72" height="89" rx="27" fill="#e98162" />
+            <rect x="23" y="18" width="42" height="7" rx="3" fill="#ffc39b" />
+            <rect x="27" y="42" width="11" height="23" rx="5" fill="#352c46" />
+            <rect x="53" y="42" width="11" height="23" rx="5" fill="#352c46" />
+            <path
+              d="M40 79q7 9 14 0"
+              fill="none"
+              stroke="#884b4e"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+            <path d="M30 46v5m26-5v5" stroke="#fff2d8" stroke-width="3" />
+          </g>
+        </svg>
+      </footer>
+    </div>
+    <script type="module" src="./game.7d77b5f884e1.js"></script>
+  </body>
+</html>
