@@ -4,6 +4,8 @@
 
 Autorska platformówka 2D: 21 krótkich poziomów, trzy rozdziały i świat, który reaguje na ruch gracza. Precyzyjne skoki, przewrotne przeszkody i błyskawiczna kolejna próba.
 
+Nie każda podłoga zostaje na swoim miejscu. Wybrane fragmenty rozsuwają się po zbliżeniu albo opadają po lądowaniu. Ich położenie i zachowanie są stałe, a odkryte miejsce pozostaje delikatnie oznaczone podczas kolejnych prób tej samej planszy. Restart po śmierci trwa około 0,32 sekundy.
+
 ## Sterowanie
 
 | Akcja | Klawisze |
