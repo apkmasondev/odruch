@@ -27,3 +27,5 @@ Postęp, rekordy i ustawienia są zapisywane lokalnie w przeglądarce. Nie są s
 Gra nie wymaga backendu, instalacji zależności ani zewnętrznych CDN. Do uruchomienia na innym hostingu wystarczy udostępnić zawartość katalogu **dist/** przez HTTP/HTTPS. GitHub Pages publikuje gałąź **main** z katalogu głównego.
 
 To repozytorium zawiera wyłącznie gotowe wydanie. Narzędzia deweloperskie, testy, dokumentacja robocza i oryginalne materiały audio nie są częścią publikacji.
+
+Poprzedni pakiet uruchomieniowy może pozostać w dystrybucji, aby karty z zachowaną w pamięci podręcznej stroną działały również podczas aktualizacji.
